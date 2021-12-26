@@ -32,7 +32,8 @@ class PoemReciter:
         else:
             print("错误！ 正确的原诗文本是：")
             print(self.poemText + "\n")
-
+            print("而您输入的是：")
+            print(answer + "\n")
 
 pr = PoemReciter()
 while(1):
