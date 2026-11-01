@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>诗词背诵 · PoemReciter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <header class="app-header">
+            <h1>诗词背诵</h1>
+            <p class="subtitle">随机抽题 · 默写校对</p>
+        </header>
+
+        <section class="card">
+            <div class="prompt-box">
+                <span class="prompt-label">请背诵：</span>
+                <h2 id="poem-header" class="poem-header">加载中…</h2>
+                <p id="poem-meta" class="poem-meta"></p>
+            </div>
+
+            <form id="recite-form" novalidate>
+                <label for="answer-input" class="sr-only">输入背诵内容（每句一行）</label>
+                <textarea
+                    id="answer-input"
+                    class="answer-textarea"
+                    rows="6"
+                    placeholder="请在此输入诗句，每句一行……&#10;（支持 Ctrl+Enter 或 Cmd+Enter 提交）"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                ></textarea>
+
+                <div class="actions">
+                    <button type="submit" id="submit-btn" class="btn btn-primary">提交核对</button>
+                    <button type="button" id="next-btn" class="btn btn-secondary">下一首</button>
+                </div>
+            </form>
+
+            <section id="result-section" class="result-section hidden" aria-live="polite">
+                <div id="result-banner" class="result-banner"></div>
+
+                <div id="comparison-box" class="comparison-box hidden">
+                    <div class="comparison-column">
+                        <h3>正确的原诗文本：</h3>
+                        <pre id="expected-text" class="poem-display"></pre>
+                    </div>
+                    <div class="comparison-column">
+                        <h3>而您输入的是：</h3>
+                        <pre id="submitted-text" class="poem-display"></pre>
+                    </div>
+                </div>
+
+                <div id="line-diff-box" class="line-diff-box hidden">
+                    <h3>逐行对比：</h3>
+                    <ul id="line-diff-list" class="line-diff-list"></ul>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
+

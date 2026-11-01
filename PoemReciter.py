@@ -1,4 +1,5 @@
 import random
+from poem_reciter.repository import normalize_poem_text
 
 class PoemReciter:
     
@@ -6,11 +7,11 @@ class PoemReciter:
         #print("Load Poems")
         #self.poems = {'闻王昌龄左迁龙标遥有此寄 【唐】李白':'杨花落尽子规啼\n闻道龙标过五溪\n我寄愁心与明月\n随君直到夜郎西'}
         self.poems = {}
-        with open("Poems", 'r') as f:
+        with open("Poems", 'r', encoding='utf-8') as f:
             for line in f.readlines():
                 line = line.strip()
                 poemName, poemText = line.split("：")
-                self.poems[poemName] = poemText.replace("\\n", "\n")
+                self.poems[poemName.strip()] = normalize_poem_text(poemText.replace("\\n", "\n"))
         self.pickRandomPoem()
     
     def pickRandomPoem(self):
@@ -26,7 +27,7 @@ class PoemReciter:
         print("请背诵：{poemName}".format(poemName = self.poemName))
         #print(self.poemText)
         sentinel = ''
-        answer = '\n'.join(iter(input, sentinel))
+        answer = normalize_poem_text('\n'.join(iter(input, sentinel)))
         if (self.poemText == answer):
             print("正确！")
         else:
@@ -35,9 +36,10 @@ class PoemReciter:
             print("而您输入的是：")
             print(answer + "\n")
 
-pr = PoemReciter()
-while(1):
-    pr.loadPoems()
-    pr.recite()
-    if ('y' != input("是否继续[Y/y]：").casefold()):
-        break
+if __name__ == "__main__":
+    pr = PoemReciter()
+    while(1):
+        pr.loadPoems()
+        pr.recite()
+        if ('y' != input("是否继续[Y/y]：").casefold()):
+            break

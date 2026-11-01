@@ -1,0 +1,12 @@
+services:
+  poem-reciter:
+    build: .
+    container_name: poem-reciter
+    restart: unless-stopped
+    ports:
+      - "${HOST_PORT:-8000}:8000"
+    volumes:
+      - ./Poems:/app/Poems:ro
+    environment:
+      - POEMS_FILE_PATH=/app/Poems
+
