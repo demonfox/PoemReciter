@@ -43,7 +43,7 @@ class TestRepositoryAndService(unittest.TestCase):
 
     def test_loads_all_poems_from_file(self):
         poems = self.service.get_all_poems()
-        self.assertEqual(len(poems), 53)
+        self.assertEqual(len(poems), 100)
         first = self.service.get_poem(1)
         self.assertIsNotNone(first)
         self.assertEqual(first.header, "江亭夜月送别 【唐】王勃")
@@ -98,7 +98,7 @@ class TestRepositoryAndService(unittest.TestCase):
     def test_console_poem_reciter_compatibility(self):
         pr = PoemReciter()
         pr.loadPoems()
-        self.assertEqual(len(pr.poems), 53)
+        self.assertEqual(len(pr.poems), 100)
         self.assertIn(pr.poemName, pr.poems)
 
 
@@ -119,7 +119,7 @@ class TestFlaskApp(unittest.TestCase):
         self.assertEqual(resp.status_code, 200)
         data = resp.get_json()
         self.assertEqual(data["status"], "ok")
-        self.assertEqual(data["total_poems"], 53)
+        self.assertEqual(data["total_poems"], 100)
 
     def test_random_poem_endpoint(self):
         resp = self.client.get("/api/poems/random")
