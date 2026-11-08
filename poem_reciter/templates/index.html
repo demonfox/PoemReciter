@@ -41,6 +41,7 @@
 
             <section id="result-section" class="result-section hidden" aria-live="polite">
                 <div id="result-banner" class="result-banner"></div>
+                <div id="poem-rolling-stats" class="poem-rolling-stats hidden"></div>
 
                 <div id="comparison-box" class="comparison-box hidden">
                     <div class="comparison-column">
@@ -54,10 +55,47 @@
                 </div>
 
                 <div id="line-diff-box" class="line-diff-box hidden">
-                    <h3>逐行对比：</h3>
+                    <h3>逐行字级对比：</h3>
                     <ul id="line-diff-list" class="line-diff-list"></ul>
                 </div>
             </section>
+        </section>
+
+        <section class="card stats-card" aria-labelledby="stats-heading">
+            <div class="stats-header">
+                <div>
+                    <h2 id="stats-heading" class="stats-title">背诵统计</h2>
+                    <p id="stats-summary-text" class="stats-subtitle">加载统计中…</p>
+                </div>
+                <label class="toggle-label" for="recited-only-toggle">
+                    <input type="checkbox" id="recited-only-toggle" checked>
+                    <span>仅显示已背诵</span>
+                </label>
+            </div>
+
+            <div class="stats-tabs" role="tablist" aria-label="统计维度">
+                <button type="button" class="stats-tab active" data-group-by="poem" role="tab" aria-selected="true">按诗词</button>
+                <button type="button" class="stats-tab" data-group-by="author" role="tab" aria-selected="false">按作者</button>
+                <button type="button" class="stats-tab" data-group-by="dynasty" role="tab" aria-selected="false">按朝代</button>
+            </div>
+
+            <div class="stats-table-wrapper">
+                <table class="stats-table">
+                    <thead>
+                        <tr id="stats-table-head-row">
+                            <th>名称</th>
+                            <th>背诵次数</th>
+                            <th>平均正确率</th>
+                            <th>累计字数正确率</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stats-table-body">
+                        <tr>
+                            <td colspan="4" class="stats-empty">暂无背诵记录</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 

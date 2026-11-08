@@ -5,6 +5,12 @@ from typing import Dict, List, Optional, Protocol
 from poem_reciter.models import Poem
 
 _HEADER_WITH_DYNASTY_RE = re.compile(r"^(.*?)\s*【(.+?)】\s*(.+)$")
+_IGNORED_CHAR_RE = re.compile(r"[\s，。、！？；：“”‘’（）《》〈〉【】·,.\-!?;:\"'()\[\]<>]+")
+
+
+def extract_poem_chars(text: str) -> str:
+    """Return only the substantive characters of a poem line/body (ignoring spaces and punctuation)."""
+    return _IGNORED_CHAR_RE.sub("", text)
 
 
 def normalize_poem_text(raw_text: str) -> str:
